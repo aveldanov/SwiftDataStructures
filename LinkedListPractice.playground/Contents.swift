@@ -12,43 +12,102 @@ struct LinkedList<Value>{
   // PUSH
   mutating func push(_ value: Value)  {
     head = Node(value: value, next: head)
-    
-    // check if empty
-    if tail == nil{
-//      print("tail:", tail)
-      tail = head
-//    print("tail:", tail)
 
-    }
+//    head = Node(value: value, next: head)  // nil | 1->nil | 2->1->nil
+    
+//    // check if list empty
+//    if tail == nil{
+////      print("tail:", tail)
+//      tail = head // nil => 1-> ?
+////    print("tail:", tail)
+//
+//    }
+    
+//    if head == nil{
+//
+//      head = Node(value: value, next: head)
+//    }else{ //1->nil
+//      head = Node(value: value, next: head)
+//
+//
+//    }
     
   }
   
   // APPEND
   mutating func append(_ value: Value){
     
-    guard !isEmpty else {
-      print("EMPTY->  pushing: ", value)
-      push(value)
-      return
+//    guard !isEmpty else {
+//      print("EMPTY->  pushing: ", value)
+//      push(value)
+//      return
+//    }
+//
+//    let node = Node(value: value)
+//    print("value", value) // 3
+//    print("tail.next",tail?.next) // nil
+//    print("tail",tail) // 2
+//    print("")
+//    tail?.next = node //  nil-> 3
+//    print("tail.next",tail?.next) // 3
+//    tail = node // 3
+//
+//    print("tail",tail) // 3
+//    print("tail.next",tail?.next)
+//    print("head", head)
+//    print("")
+    
+    if tail == nil{
+      head = Node(value: value, next: head) // 1->nil
+      tail = head
+    }else{ // 1->2->nil | 1->2->3nil
+      
+      let newNode = Node(value: value, next: nil) // 1->nil | 2->nil
+      tail?.next = newNode // 1->nil | 1-> 2-> nil
+      tail = newNode
+      
     }
     
-    let node = Node(value: value)
-    print("value", value) // 3
-    print("tail.next",tail?.next) // nil
-    print("tail",tail) // 2
-    print("")
-    tail?.next = node //  nil-> 3
-    print("tail.next",tail?.next) // 3
-    tail = node // 3
     
-    print("tail",tail) // 3
-    print("tail.next",tail?.next)
-    print("head", head)
-    print("")
 
   }
   
+// Find a node
+  func findNodeAtIndex(at index:Int)-> Node<Value>?{
+    
+    var currentIndex = 0
+    var currentNode = head
+    
+    while currentNode != nil && currentIndex < index {
+      currentNode = currentNode?.next // 4->3->2->1->nil | 3->2->1->nil
+      currentIndex += 1
+    }
+    return currentNode
+    
+  }
+  
+  func insertAtIndex(_ value: Value, after node: Node<Value>)  { // 3->
+    node.next = Node(value: value, next: node.next) // 3-> 5-> 2->1->nil
+  }
+  
+  
+  // Pop
+  
+  mutating func pop()->Value?{
+    
+    defer{
+      head = head?.next
 
+      if head == nil{
+        tail = nil
+      }
+      
+    }
+    
+    return head?.value
+  }
+  
+  
   
   
   init(){}
@@ -103,16 +162,26 @@ extension Node: CustomStringConvertible{
 
 var list = LinkedList<Int>()
 
-//list.push(2)
-//list.push(3)
-//list.push(22)
-list.append(2)
-list.append(3)
-//list.append(22)
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+//list.append(1)
+//list.append(2)
+//list.append(3)
+//list.append(4)
+//print(list)
+//
+//
+//let midlleNode = list.findNodeAtIndex(at: 1)!
+//print(midlleNode)
+//list.insertAtIndex(5, after: midlleNode)
+//
 
-
+list.pop()
 print(list)
 
+//print(list.findNodeAtIndex(at: 1))
 
 
 
