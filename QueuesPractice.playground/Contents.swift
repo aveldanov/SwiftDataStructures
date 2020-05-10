@@ -9,4 +9,14 @@ struct Queue<T>{
   var isEmpty:Bool{
     return array.isEmpty
   }
+  
+  
+  var peek: T?{
+    return array.first
+  }
+  
 }
+
+
+
+
