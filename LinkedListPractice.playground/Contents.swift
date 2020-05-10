@@ -109,6 +109,53 @@ struct LinkedList<Value>{
   
   
   
+  // Remove Last
+  
+  mutating func removeLast()->Value?{
+    
+    guard let head = head else {
+      return nil
+    }
+    
+    guard head.next != nil else {
+      return pop()
+    }
+    // 3->2->1->nil
+    var prevNode = head // 3->
+    var currentNode = head // 3->
+    // looking when NEXT = nil
+    while let next = currentNode.next{
+      prevNode = currentNode // 3-> | 2-> |
+      currentNode = next // 2-> | 1-> |
+    }
+    
+    prevNode.next = nil // 1-> => nil
+    tail = prevNode // 2->
+
+    
+    return currentNode.value // 1->
+    
+  }
+  
+  
+  
+  mutating func removeAfter(after node: Node<Value>)->Value?{
+    // 4->3->2->1->nil
+    
+    defer {
+      if node.next === tail{ // say 2->1->nil
+        tail = node   // 2->nil
+
+      }
+      // skipping a node
+      node.next = node.next?.next
+      
+    }
+    
+    return node.next?.value
+    
+  }
+  
   
   init(){}
   
@@ -178,7 +225,12 @@ list.push(4)
 //list.insertAtIndex(5, after: midlleNode)
 //
 
-list.pop()
+//list.pop()
+//list.removeLast()
+
+let index = 2
+let node = list.findNodeAtIndex(at: index)
+list.removeAfter(after: node!)
 print(list)
 
 //print(list.findNodeAtIndex(at: 1))
