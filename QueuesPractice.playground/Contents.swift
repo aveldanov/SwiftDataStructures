@@ -2,47 +2,84 @@
 
 
 
+//struct Queue<T>{
+//
+//  var array:[T] = []
+//  init(){}
+//  var isEmpty:Bool{
+//    return array.isEmpty
+//  }
+//
+//
+//  var peek: T?{
+//    return array.first
+//  }
+//
+//
+//  mutating func createQueue(_ element:T) -> Bool{
+//    array.append(element)
+//    // being added
+//    return true
+//  }
+//
+//  mutating func deQueue()-> T?{
+//
+//    return isEmpty ? nil : array.removeFirst()
+//
+//  }
+//
+//}
+
+
+
+
 struct Queue<T>{
+  var elements:[T] = []
   
-  var array:[T] = []
-  init(){}
   var isEmpty:Bool{
-    return array.isEmpty
+    return elements.isEmpty
+  }
+  
+  var peek:T?{
+    
+  return  elements.first
   }
   
   
-  var peek: T?{
-    return array.first
-  }
-  
-  
-  mutating func createQueue(_ element:T) -> Bool{
-    array.append(element)
-    // being added
+  mutating func queue(_ value:T)->Bool{
+    
+    elements.append(value)
     return true
   }
   
-  mutating func deQueue()-> T?{
+  mutating func dequeue()->T?{
     
-    return isEmpty ? nil : array.removeFirst()
- 
+    
+    return isEmpty ? nil : elements.removeFirst()
+    
+    
   }
-
+  
+  
 }
+
+
+
+
 
 
 extension Queue: CustomStringConvertible{
   var description: String {
-    return String(describing: array)
+    return String(describing: elements)
   }
   
 }
 
 
 var queue = Queue<Int>()
-queue.createQueue(1)
-queue.createQueue(2)
-queue.createQueue(3)
+queue.queue(1)
+queue.queue(2)
+queue.queue(3)
 print(queue.peek)
-print(queue.deQueue())
+print(queue.dequeue())
 print(queue)
