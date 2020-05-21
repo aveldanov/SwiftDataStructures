@@ -1,4 +1,3 @@
-
 class BinaryNode<T>{
   
   var value: T
