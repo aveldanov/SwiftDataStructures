@@ -1,6 +1,25 @@
+struct Queue<Element>{
+    
+    var elements = [Element]()
+//    var isEmpty: Bool{
+//        return elements.isEmpty
+//    }
+    mutating func enqueue(_ value: Element) -> Bool{
+        elements.append(value)
+        return true
+    }
+    
+    mutating func dequeue()-> Element?{
+        return elements.isEmpty ? nil : elements.removeFirst()
+    }
+    
+}
+
+
+
 class TreeNode<T>{
     var value : T
-    var childeren = [TreeNode]()
+    var children = [TreeNode]()
     init(_ value: T) {
         self.value = value
     }
@@ -8,7 +27,7 @@ class TreeNode<T>{
     
     // function to add a node
     func add(_ child:TreeNode){
-        childeren.append(child)
+        children.append(child)
     }
     
 }
@@ -25,24 +44,55 @@ let coffee = TreeNode("Coffee")
 
 let soda = TreeNode("Soda")
 let milk = TreeNode("Milk")
+let kefir = TreeNode("kefir")
+let butter = TreeNode("butter")
+
 beverages.add(hot)
 beverages.add(cold)
-
 hot.add(tea)
 hot.add(coffee)
 cold.add(soda)
 cold.add(milk)
-
+milk.add(kefir)
+milk.add(butter)
 
 
 extension TreeNode{
     
     func forEachDepthFirst(_ visit:(TreeNode)->Void){
         visit(self)
-        childeren.forEach{
+        children.forEach{
             $0.forEachDepthFirst(visit)
         }
+    }
+    
+    
+    func forEachLevelOrder(_ visit:(TreeNode)->Void){
+        visit(self)
+        var queue = Queue<TreeNode>()
+        children.forEach {
+            print("boom ",$0.value)
+            queue.enqueue($0)
+        }
         
+        
+        while let node = queue.dequeue() {
+            visit(node)
+            node.children.forEach{
+                queue.enqueue($0)
+            }
+        }
+    }
+    
+    func search(_ searchValue: T) -> TreeNode?{
+        var result: TreeNode?
+
+        forEachLevelOrder { (node) in
+            if node.value == searchValue{
+                result = node
+            }
+        }
+        return result
     }
     
     
@@ -53,10 +103,12 @@ extension TreeNode{
 
 
 
-beverages.forEachDepthFirst { print($0.value)
+//beverages.forEachDepthFirst { print($0.value)
+//}
+
+beverages.forEachLevelOrder{
+    print($0.value)
 }
-
-
 
 
 
