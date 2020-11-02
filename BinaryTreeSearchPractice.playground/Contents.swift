@@ -17,7 +17,7 @@ class BinaryNode<T>{
 
 struct BinarySearchTree<T: Comparable>{
   
-  private var root : BinaryNode<T>
+  private var root : BinaryNode<T>?
   
   init(){}
   
