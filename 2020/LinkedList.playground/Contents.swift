@@ -9,7 +9,7 @@ class Node<T>{
     
 }
 
-struct LinkedList<T>{
+struct LinkedList<T> where T: Equatable{
     var head: Node<T>?
 
     mutating func push(_ value: T){
@@ -21,8 +21,45 @@ struct LinkedList<T>{
         while current?.next != nil {
             current = current?.next
         }
-        current?.next = Node(value, next: nil)
+            current?.next = Node(value, next: nil)
+
     }
+    
+    mutating func delete(_ value: T){
+        if head?.value == value{
+            head = head?.next
+            return
+        }
+        
+        var current = head
+        var prev : Node<T>?
+        while current != nil && current?.value != value {
+            prev = current
+            current = current?.next
+        }
+        
+        prev?.next = current?.next
+        
+    }
+    
+    mutating func insertAt(after value: T, insertValue: T){
+        if head == nil{
+            head = Node(value, next: nil)
+        }
+            
+        var current = head
+        var prev : Node<T>?
+        while current?.value != value && current != nil {
+            prev = current
+            current = current?.next
+            
+        }
+        var nextNode = current?.next
+        current?.next = Node(insertValue, next: nextNode)
+        
+        
+    }
+    
     
     
     func displayList(){
@@ -76,8 +113,12 @@ one.next = two
 two.next = three
 three.next = nil
 
-list.push(10)
-list.push(11)
-list.push(12)
+list.push(1)
+list.push(2)
+list.push(3)
+
+//list.delete(2)
+
+list.insertAt(after: 122, insertValue: 10)
 
 list.displayList()
