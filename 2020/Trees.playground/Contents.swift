@@ -57,7 +57,7 @@ milk.add(kefir)
 milk.add(butter)
 
 
-extension TreeNode{
+extension TreeNode where T: Equatable{
     
     func forEachDepthFirst(_ visit:(TreeNode)->Void){
         visit(self)
@@ -106,13 +106,13 @@ extension TreeNode{
 //beverages.forEachDepthFirst { print($0.value)
 //}
 
-beverages.forEachLevelOrder{
-    print($0.value)
-}
+//beverages.forEachLevelOrder{
+//    print($0.value)
+//}
 
 
 
-
+print(beverages.search("Soda")?.value)
 
 
 
