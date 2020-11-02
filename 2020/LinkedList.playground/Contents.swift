@@ -11,19 +11,17 @@ class Node<T>{
 
 struct LinkedList<T>{
     var head: Node<T>?
-    var tail: Node<T>?
-    
-    var isEmpty: Bool{
-        return head == nil
-    }
-    init() {}
-    
-    
+
     mutating func push(_ value: T){
-        head = Node(value, next: head)
-        if tail == nil{
-            tail = head
+        if head == nil{
+            head  = Node(value, next: nil)
+            return
         }
+        var current = head
+        while current?.next != nil {
+            current = current?.next
+        }
+        current?.next = Node(value, next: nil)
     }
     
     
@@ -82,4 +80,4 @@ list.push(10)
 list.push(11)
 list.push(12)
 
-print(list.displayList())
+list.displayList()
