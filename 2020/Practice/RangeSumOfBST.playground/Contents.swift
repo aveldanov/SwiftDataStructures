@@ -10,7 +10,6 @@
           self.right = right
       }
     
-    
     func treeInOrderTraversal(visit: (Int)->(Void)){
         left?.treeInOrderTraversal(visit: visit)
         visit(val)
