@@ -1,42 +1,23 @@
-class TreeNode<T>{
-    var left: TreeNode?
-    var right: TreeNode?
-    var value: T
-    init(_ value: T) {
-        self.value = value
+var arr = [55,44,33,66,22,77,88,1,10]
+
+
+func bubbleSort(arr: inout [Int])->[Int]{
+    
+    for i in 0..<arr.count{
+        for j in 0..<arr.count {
+            
+            if arr[j] > arr[i]{
+                
+                arr.swapAt(i, j)
+            }
+            
+        }
     }
     
-    func treeTraversal(visit:(_ value:T)->(Void)){
-        visit(value)
-        
-        left?.treeTraversal(visit: visit)
-        right?.treeTraversal(visit: visit)
-        
-    }
     
+    return arr
     
 }
 
 
-/*
- 1
- 2 3
-    4 5
- 
- 
- */
-
-
-let one = TreeNode(1)
-let two = TreeNode(2)
-let three = TreeNode(3)
-let four = TreeNode(4)
-let five = TreeNode(5)
-
-
-
-one.left = two
-one.right = three
-three.left = four
-three.right = five
-
+print(bubbleSort(arr: &arr))
