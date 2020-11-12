@@ -1,23 +1,31 @@
-var arr = [55,44,33,66,22,77,88,1,10]
-
-
-func bubbleSort(arr: inout [Int])->[Int]{
+class Stack<T>{
     
-    for i in 0..<arr.count{
-        for j in 0..<arr.count {
-            
-            if arr[j] > arr[i]{
-                
-                arr.swapAt(i, j)
-            }
-            
-        }
+    var array: [T] = []
+    
+    
+    func displayStack(){
+        
+        print(array.map{
+            "\($0)"
+        }.reversed().joined(separator: ","))
     }
     
-    
-    return arr
-    
+    func push(_ value:T){
+        array.append(value)
+    }
+    func pop()->T?{
+        return array.popLast()
+    }
 }
 
 
-print(bubbleSort(arr: &arr))
+let stack = Stack<Int>()
+
+
+stack.push(4)
+stack.push(5)
+stack.push(6)
+
+stack.displayStack()
+stack.pop()
+stack.displayStack()
