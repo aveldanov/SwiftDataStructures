@@ -11,8 +11,7 @@ class Queue<T>{
     
     func dequeue()->T?{
         
-        return queueStore.isEmpty ? nil : queueStore.removeLast()
-    }
+        return queueStore.isEmpty ? nil : queueStore.removeFirst()    }
 
     
 }
@@ -22,7 +21,7 @@ let queue = Queue<Int>()
 queue.enqueue(1)
 queue.enqueue(2)
 queue.enqueue(3)
+queue.dequeue()
 
-
-print(queue)
+print(queue.queueStore)
 
