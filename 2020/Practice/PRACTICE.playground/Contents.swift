@@ -1,54 +1,24 @@
-class ListNode<T>{
-    var next: ListNode?
-    var value: T
-    init(_ value:T, _ next: ListNode?) {
-        self.value = value
-        self.next = next
-    }
+var arr = [66,44,33,22,77,1,9,17,35,32]
 
+
+func bubbleSort(arr: inout[Int])->[Int]{
+    
+    for i in 0..<arr.count-1{
+        for j in 0..<arr.count-1 {
+            print(j)
+            print("arr[j]",arr[j])
+            print("arr[j+1]",arr[j+1])
+
+            if arr[j] > arr[j+1]{
+                arr.swapAt(j+1, j)
+            }
+            print(arr)
+
+            print("")
+        }
+    }
+    return arr
 }
 
 
-class LinkedList<T>{
-    var head: ListNode<T>?
-    
-    func displayNodes(){
-        var current = head
-        
-        while current!.next != nil {
-            print(current?.value ?? "")
-            current = current?.next
-        }
-        
-        
-    }
-    
-    
-    func push(value: T){
-        if head == nil{
-            head = ListNode(value, nil)
-        }
-        
-        var current = head
-        while current != nil {
-            current = current?.next
-        }
-        
-        head = ListNode(value, head)
-        
-        
-    }
-    
-    
-}
-
-
-let linkedList = LinkedList<Int>()
-
-linkedList.push(value: 3)
-linkedList.push(value: 2)
-linkedList.push(value: 1)
-
-
-linkedList.displayNodes()
-
+print(bubbleSort(arr: &arr))
