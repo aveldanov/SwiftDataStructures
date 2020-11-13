@@ -1,28 +1,47 @@
-var arr = [1,3,5,6,8,9,11,23,44,55,66,77,98]
+class ListNode<T>{
+    var next: ListNode?
+    var value: T
+    init(_ value:T, _ next: ListNode?) {
+        self.value = value
+        self.next = next
+    }
+
+}
 
 
-
-func binarySearch(arr:[Int], searchItem: Int)->Bool{
-    var startIndex = 0
-    var endIndex = arr.count-1
-    var midIndex = 0
+class LinkedList<T>{
+    var head: ListNode<T>?
     
-    
-    while startIndex<=endIndex {
-        midIndex = (startIndex+endIndex)/2
-        if arr[midIndex] == searchItem{
-            return true
-        }else if searchItem < arr[midIndex]{
-            endIndex = midIndex-1
-        }else{
-            startIndex = midIndex + 1
+    func displayNodes(){
+        var current = head
+        
+        while current!.next != nil {
+            print(current?.value ?? "")
+            current = current?.next
         }
+        
         
     }
     
     
-    return false
+    func push(value: T){
+        if head == nil{
+            head = ListNode(value, nil)
+        }
+        
+        var current = head
+        while current != nil {
+            current = current?.next
+        }
+        
+        head = ListNode(value, head)
+        
+        
+    }
+    
+    
 }
 
 
-binarySearch(arr: arr, searchItem: 3)
+let listNode = 
+
