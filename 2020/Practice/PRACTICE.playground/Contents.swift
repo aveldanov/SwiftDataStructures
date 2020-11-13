@@ -43,5 +43,7 @@ class LinkedList<T>{
 }
 
 
-let listNode = 
+let linkedList = LinkedList<Int>()
+
+
 
