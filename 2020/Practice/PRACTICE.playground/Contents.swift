@@ -46,5 +46,9 @@ class LinkedList<T>{
 let linkedList = LinkedList<Int>()
 
 linkedList.push(value: 3)
+linkedList.push(value: 2)
+linkedList.push(value: 1)
 
+
+linkedList.displayNodes()
 
