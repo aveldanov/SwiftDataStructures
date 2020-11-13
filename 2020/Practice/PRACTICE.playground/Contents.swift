@@ -45,5 +45,6 @@ class LinkedList<T>{
 
 let linkedList = LinkedList<Int>()
 
+linkedList.push(value: 3)
 
 
