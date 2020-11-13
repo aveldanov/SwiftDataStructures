@@ -1,5 +1,5 @@
 class Stack<T>{
     
-    
+      
     
 }
