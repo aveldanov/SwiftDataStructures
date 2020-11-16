@@ -1,58 +1,33 @@
-struct Point{
-    var x: Int
-    var y: Int
+var arr = [44,55,22,1,5,17,89,13,48,102]
+
+
+func mergeSort(arr: inout [Int])->[Int]{
+    guard arr.count>1 else {
+        return arr
+    }
     
+    var arrOne = Array(arr[0..<arr.count/2])
+    var arrTwo = Array(arr[arr.count/2..<arr.count])
+    
+    arrOne = mergeSort(arr: &arrOne)
+    arrTwo = mergeSort(arr: &arrTwo)
+    return merge(left: &arrOne, right: &arrTwo)
 }
 
-
-struct Size{
-    var width: Int
-    var height: Int
-}
-
-public class ColumnLayout{
-    static func layoutChildViews(parentViewSize: Size, childViewSizes: [Size]) throws -> [Point]{
-                
-        var remainingWidth = parentViewSize.width
-        var remainingHeight = parentViewSize.height
-        var array = [Point]()
-        var point = Point(x: 0, y: 0)
-        var count = 0
-        for item in childViewSizes{
-            print("RemW", remainingWidth)
-            if item.width <= remainingWidth && count <= childViewSizes.count{
-                if item.height <= remainingHeight{
-                    point.y = parentViewSize.height - remainingHeight
-                    point.x = parentViewSize.width - remainingWidth
-                    print("point a ", point)
-                    array.append(point)
-                    remainingHeight -= item.height
-
-                }else{
-                    remainingWidth -= item.width
-                    remainingHeight = parentViewSize.height
-                    point.y = parentViewSize.height - remainingHeight
-                    point.x = parentViewSize.width - remainingWidth
-                    print("point b",point)
-                    array.append(point)
-                    remainingHeight -= item.height
-
-                }
-            }else{
-               throw
-                return array
-            }
-
+func merge(left: inout [Int], right: inout [Int])->[Int]{
+    var mergedArr = [Int]()
+    while left.count > 0 && right.count > 0 {
+        if left.first! < right.first! {
+            mergedArr.append(left.removeFirst())
+        }else{
+            mergedArr.append(right.removeFirst())
         }
-        
-        
-        
-        return array
     }
     
     
+    return mergedArr + left + right
 }
 
 
+print(mergeSort(arr: &arr))
 
-try ColumnLayout.layoutChildViews(parentViewSize: Size(width: 5, height: 10), childViewSizes: [Size(width: 2, height: 3), Size(width: 2, height: 3),Size(width: 2, height: 3),Size(width: 2, height: 3),Size(width: 2, height: 3),Size(width: 2, height: 3),Size(width: 2, height: 3)])
