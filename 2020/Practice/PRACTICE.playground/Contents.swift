@@ -1,33 +1,56 @@
-var arr = [44,55,22,1,5,17,89,13,48,102]
 
 
-func mergeSort(arr: inout [Int])->[Int]{
-    guard arr.count>1 else {
-        return arr
+class Person {
+    var name : String
+    var laptop: Laptop?
+    
+    init(name: String, laptop: Laptop?) {
+        self.name = name
+        self.laptop = laptop
     }
     
-    var arrOne = Array(arr[0..<arr.count/2])
-    var arrTwo = Array(arr[arr.count/2..<arr.count])
-    
-    arrOne = mergeSort(arr: &arrOne)
-    arrTwo = mergeSort(arr: &arrTwo)
-    return merge(left: &arrOne, right: &arrTwo)
+    deinit {
+        print("Deinit \(name)")
+    }
+ 
 }
 
-func merge(left: inout [Int], right: inout [Int])->[Int]{
-    var mergedArr = [Int]()
-    while left.count > 0 && right.count > 0 {
-        if left.first! < right.first! {
-            mergedArr.append(left.removeFirst())
-        }else{
-            mergedArr.append(right.removeFirst())
-        }
+class Laptop{
+    var owner: Person?
+    var laptopName: String
+    
+    init(laptopName: String, owner: Person? ) {
+        self.owner = owner
+        self.laptopName = laptopName
     }
     
+    deinit {
+        print("Deinit \(laptopName)")
+    }
     
-    return mergedArr + left + right
+}
+
+var anton : Person?
+var mac1 : Laptop?
+
+func createObjects(){
+    anton = Person(name: "anton", laptop: nil)
+    mac1 = Laptop(laptopName: "macac1", owner: nil)
+
+//    anton = nil
+//    mac1 = nil
+}
+
+func assignProp(){
+    
+    anton?.laptop = mac1
+    mac1?.owner = anton
+    
+    anton = nil
 }
 
 
-print(mergeSort(arr: &arr))
 
+createObjects()
+
+assignProp()
