@@ -27,10 +27,9 @@ func reverseList(head: ListNode<Int>?)->ListNode<Int>?{
     var prev: ListNode<Int>?
     var next: ListNode<Int>?
     var current = head
-    
     while current != nil {
         next = current?.next
-        
+        current?.next = prev
         prev = current
         current = next
         
