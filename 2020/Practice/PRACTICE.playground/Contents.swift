@@ -1,45 +1,30 @@
-
-class Person{
-    var name: String
-    var laptop: Computer?
-    init(name:String, laptop: Computer?) {
-        self.name = name
-        self.laptop = laptop
-    }
-    
-    deinit {
-        print("\(name) has been deinit")
+class ListNode<T>{
+    var next: ListNode?
+    var value: T
+    init(_ value: T, _ next: ListNode?) {
+        self.value = value
+        self.next = next
     }
 }
 
-class Computer{
-    var laptopName: String
-    var owner: Person?
-    init(laptopName:String, owner: Person?) {
-        self.laptopName = laptopName
-        self.owner = owner
-    }
-    
-    deinit {
-        print("\(laptopName) has been deinit")
+let three = ListNode(3, nil)
+let two = ListNode(2, three)
+let one = ListNode(1, two)
 
+func displayNode(head:ListNode<Int>?){
+    var current = head
+    while current!.next != nil {
+        print(current?.value ?? "")
+        current = current?.next
     }
 }
 
-var anton: Person?
-var mac1: Computer?
-
-anton = Person(name: "anton", laptop: nil)
-mac1 = Computer(laptopName: "mac1L", owner: nil)
-
-
-func initComp(){
+func reverseList(head: ListNode<Int>?)->ListNode<Int>?{
     
-    anton?.laptop = mac1
-    mac1?.owner = anton
     
-    anton = nil
+    return head
 }
 
 
-initComp()
+displayNode(head: one)
+
