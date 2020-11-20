@@ -13,18 +13,34 @@ let one = ListNode(1, two)
 
 func displayNode(head:ListNode<Int>?){
     var current = head
-    while current!.next != nil {
+    while current != nil {
         print(current?.value ?? "")
         current = current?.next
     }
 }
 
+// nil<-1->2->3->nil
+//       prev curr next
+// nil->3->2->1->nil
+
 func reverseList(head: ListNode<Int>?)->ListNode<Int>?{
     
+    var prev: ListNode<Int>?
+    var next: ListNode<Int>?
+    var current = head
     
-    return head
+    while current != nil{
+        
+        next = current?.next //2
+        current?.next = prev
+
+        prev = current //1
+        current = next //2
+    }
+    
+    return prev
 }
 
+reverseList(head: one)
 
-displayNode(head: one)
 
