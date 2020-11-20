@@ -25,20 +25,7 @@ func displayNode(head:ListNode<Int>?){
 
 func reverseList(head: ListNode<Int>?)->ListNode<Int>?{
     
-    var prev: ListNode<Int>?
-    var next: ListNode<Int>?
-    var current = head
-    
-    while current != nil{
-        
-        next = current?.next //2
-        current?.next = prev
 
-        prev = current //1
-        current = next //2
-    }
-    
-    return prev
 }
 
 reverseList(head: one)
