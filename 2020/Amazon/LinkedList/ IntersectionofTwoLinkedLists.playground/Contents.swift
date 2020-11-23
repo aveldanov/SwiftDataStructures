@@ -46,23 +46,18 @@
 
 class Solution {
     func getIntersectionNode(_ headA: ListNode?, _ headB: ListNode?) -> ListNode? {
-        if headA == nil {
-            return headB
+        if headA == nil || headB == nil{
+            return nil
         }
-        if headB == nil {
-            return headA
+        var currentA = headA
+        var currentB = headB
+        while currentA !== currentB {
+            currentA = currentA == nil ? headB : currentA?.next
+            currentB = currentB == nil ? headA : currentB?.next
         }
         
-        var current = headA
         
-        while current?.next != nil && current?.val != 8 {
-            current = current?.next
-        }
-        var newHead = ListNode?.self
-        
-        newHead = ListNode(8)
-        
-        return newHead
+        return currentA
     }
 }
 
