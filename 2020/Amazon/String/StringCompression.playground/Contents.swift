@@ -40,40 +40,89 @@
 
 
 class Solution {
-    func compress(_ chars:  [Character]) -> Int {
-        var chars = chars
-        guard chars.count > 0 else {
-            return 0
-        }
-        var index = 0
-        var i = 0
-        var count = ""
+    func compress(_ chars: inout [Character]) -> Int {
         
-        while i<chars.count {
-            var j = i+1
-            while j<chars.count && chars[j] == chars[i]{
+        var arr = [String]()
+        var j = 0
+        var count = 0
+        var arrayInt = [Int]()
+
+        while j<chars.count {
+            let current = chars[j]
+            while j<chars.count && chars[j] == current {
+                count+=1
                 j+=1
             }
-            index+=1
-            chars[index] = chars[i]
-            if j - i > 1{
-                count = String(j-i)
-                for char in count{
-                    index+=1
-                    chars[index] = char
+            print("count",count)
+            if count > 1{
+                
+                arrayInt.append(count%10)
+                while count >= 10 {
+                    count = count/10
+                  arrayInt.insert(count%10, at: 0)
                 }
+                
+                var arrStr = arrayInt.map{String($0)}
+                print("arrint",arrStr)
+                
+                arr.append(String(current))
+                arr+=arrStr
+            }else{
+                arr.append(String(current))
             }
-            
-            
-            i = j
+            count = 0
+            arrayInt = [Int]()
+           print(arr)
         }
         
-
-        return index
+        chars = arr.map{Character($0)}
+        return chars.count
     }
 }
 
 
 let solution = Solution()
+var arrr = ["a","a","a","b","b","a","a"].map{
+    Character($0)
+}
+print(solution.compress(&arrr))
 
-print(solution.compress(["a","a","b","b","c","c","c"]))
+
+/*
+ 
+ class Solution {
+     func compress(_ chars:  [Character]) -> Int {
+         var chars = chars
+         guard chars.count > 0 else {
+             return 0
+         }
+         var index = 0
+         var i = 0
+         var count = ""
+         var j = 0
+         while i<chars.count {
+              j = i
+             while j<chars.count && chars[j] == chars[i]{
+                 j+=1
+             }
+             index+=1
+             chars[index] = chars[i]
+             if j - i > 1{
+                 count = String(j-i)
+                 for char in count{
+                     print(char)
+                     chars[index] = char
+
+                     index+=1
+                 }
+             }
+             
+             
+             i = j
+         }
+         
+
+         return index
+     }
+ }
+ */
